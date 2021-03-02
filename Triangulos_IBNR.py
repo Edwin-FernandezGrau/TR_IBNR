@@ -36,14 +36,7 @@ var_desarrollo = st.sidebar.selectbox("Seleccione variable desarrollo",variables
 var_movimiento = st.sidebar.selectbox("Seleccione variable Tipo de movimiento ",  variables, index= 3 ) 
 var_tri = st.sidebar.selectbox("Seleccione variable a triangular ",  variables, index= 3 )
 
-frecuencia = st.sidebar.selectbox("Seleccione la frecuencia temporal",  ["Mensual","Trimestral","Anual"], index= 2 )
-if frecuencia  == "Mensual":
-    grain_f = "OMDM"
-elif frecuencia == "Trimestral":
-    grain_f = "OQDQ"
-else:
-    grain_f = "OYDY"
-    
+   
 #posibilidad de filtrar moneda
     
 f_mon = st.sidebar.radio("Desea filtrar moneda",
@@ -75,7 +68,7 @@ else:
 st.markdown("**Triangulo de incurridos incremental**")
 
 tri_r_incr = cl.Triangle(base_r, origin= var_origen , development= var_desarrollo ,columns=[var_tri])
-tr_incurridos_increm = tri_r_incr.incr_to_cum().grain(grain_f).cum_to_incr().to_frame()
+tr_incurridos_increm = tri_r_incr.to_frame()
 tr_incurridos_increm.index = tr_incurridos_increm.index.strftime('%Y-%m')
 st.dataframe(tr_incurridos_increm.round(2).fillna(""))
 tr_incurridos_increm = tr_incurridos_increm.fillna("")
@@ -84,7 +77,7 @@ tr_incurridos_increm = tr_incurridos_increm.fillna("")
 ##### TRIANGULO INCREMENTAL DE PAGOS (Tipo de movimiento P)   
 st.markdown("**Triangulo de pagos incremental**")     
 tri_p_incr = cl.Triangle(base_p, origin= var_origen , development= var_desarrollo ,columns=['Monto en soles'])
-tr_pagos_increm = tri_p_incr.incr_to_cum().grain(grain_f).cum_to_incr().to_frame()
+tr_pagos_increm = tri_p_incr.to_frame()
 tr_pagos_increm.index = tr_pagos_increm.index.strftime('%Y-%m')
 st.dataframe(tr_pagos_increm.round(2).fillna(""))
 tr_pagos_increm = tr_pagos_increm.fillna("")
@@ -93,7 +86,7 @@ tr_pagos_increm = tr_pagos_increm.fillna("")
 
 ##### TRIANGULO ACUMULADO DE INCURRIDOS (Tipo de movimiento R)
 st.markdown("**Triangulo de incurridos acumulado**")
-tri_r_acum = tri_r_incr.incr_to_cum().grain(grain_f)
+tri_r_acum = tri_r_incr.incr_to_cum()
 tr_incurridos_acum = tri_r_acum.to_frame()
 tr_incurridos_acum.index = tr_incurridos_acum.index.strftime('%Y-%m')
 st.dataframe(tr_incurridos_acum.round(2).fillna(""))
@@ -102,7 +95,7 @@ tr_incurridos_acum = tr_incurridos_acum.fillna("")
 
 ##### TRIANGULO ACUMULADO DE PAGOS (Tipo de movimiento R)
 st.markdown("**Triangulo de pagos acumulado**")
-tri_p_acum = tri_p_incr.incr_to_cum().grain(grain_f)
+tri_p_acum = tri_p_incr.incr_to_cum()
 tr_pagos_acum = tri_p_acum.to_frame()
 tr_pagos_acum.index = tr_pagos_acum.index.strftime('%Y-%m')
 st.dataframe(tr_pagos_acum.round(2).fillna("") )
@@ -112,7 +105,7 @@ tr_pagos_acum = tr_pagos_acum.fillna("")
 ######## TRIANGULOS DE RESERVAS 
 st.markdown("**Triangulo de reservas**")
 tri_inc_incr = tri_r_incr - tri_p_incr
-tr_reservas_increm = tri_inc_incr.incr_to_cum().grain(grain_f).cum_to_incr().to_frame() 
+tr_reservas_increm = tri_inc_incr.to_frame() 
 tr_reservas_increm.index = tr_reservas_increm.index.strftime('%Y-%m')
 st.dataframe(tr_reservas_increm.round(2).fillna(""))
 tr_reservas_increm = tr_reservas_increm.fillna("")
@@ -120,7 +113,7 @@ tr_reservas_increm = tr_reservas_increm.fillna("")
 
 ######## TRIANGULOS ACUMULADO DE RESERVAS
 st.markdown("**Triangulo acumulado de reservas**")
-tri_inc_acum = tri_inc_incr.incr_to_cum().grain(grain_f)
+tri_inc_acum = tri_inc_incr.incr_to_cum()
 tr_reservas_acum = tri_inc_acum.to_frame()
 tr_reservas_acum.index = tr_reservas_acum.index.strftime('%Y-%m')
 st.dataframe(tr_reservas_acum.round(2).fillna("") )
