@@ -45,16 +45,18 @@ f_mon = st.sidebar.radio("Desea filtrar moneda",
 if f_mon == 'Si':
         var_moneda = st.sidebar.selectbox("Seleccione variable moneda ", variables , index= 1 )
         moneda_f =   st.sidebar.selectbox("Seleccione variable moneda ", list(base0[var_moneda].unique())  , index= 0 )
-        base = base0[base0[var_moneda] == moneda_f]
-else:
-        base = base0
+
 
 
 
 modelo = st.sidebar.button('Calcular')
 if modelo:
-
    
+        if f_mon == 'Si':
+            base = base0[base0[var_moneda] == moneda_f]
+        else:
+            base = base0
+
         base_r = base[base[var_movimiento] == "R"]
         base_p = base[base[var_movimiento] == "P"]
         
