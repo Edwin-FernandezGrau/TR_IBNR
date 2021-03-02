@@ -51,7 +51,7 @@ else:
 
 
 
-modelo = st.sidebar.buttom('Calcular')
+modelo = st.sidebar.button('Calcular')
 if modelo:
 
    
