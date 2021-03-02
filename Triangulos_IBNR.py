@@ -368,20 +368,22 @@ if modelo:
         
         
         
-        data_final0 = tr_incurridos_increm
+        data_final = tr_incurridos_increm
         
-        data_final0 =  data_final0.append(pd.Series(name=''))
-        data_final0.loc['TR Pagos Incremental'] = tr_pagos_increm.columns
-        data_final0  = data_final0.append(tr_pagos_increm)
-        
-        
-        data_final0 =  data_final0.append(pd.Series(name=''))
-        data_final0.loc['TR Reservas incremental'] = tr_reservas_increm.columns
-        data_final0  = data_final0.append(tr_reservas_increm)
+        data_final =  data_final.append(pd.Series(name=''))
+        data_final.loc['TR Pagos Incremental'] = tr_pagos_increm.columns
+        data_final  = data_final.append(tr_pagos_increm)
         
         
+        data_final =  data_final.append(pd.Series(name=''))
+        data_final.loc['TR Reservas incremental'] = tr_reservas_increm.columns
+        data_final  = data_final.append(tr_reservas_increm)
         
-        data_final = tr_incurridos_acum
+        data_final =  data_final.append(pd.Series(name=''))
+        data_final.loc['TR Incurridos acum'] = tr_incurridos_acum.columns
+        data_final  = data_final.append(tr_incurridos_acum)
+        
+        
         
         data_final =  data_final.append(pd.Series(name=''))
         data_final.loc['TR Pagos Acum'] = tr_incurridos_acum.columns
@@ -419,17 +421,9 @@ if modelo:
         
         
         
-        
-        
-        csv = data_final0.to_csv()
-        b64 = base64.b64encode(csv.encode()).decode()  # some strings <-> bytes conversions necessary here
-        href = f'<a href="data:file/csv;base64,{b64}">Download CSV Triangulos incrementales </a> (save as Triangulos incrementales.csv)'
-        st.markdown(href, unsafe_allow_html=True)
-        
-        
         csv = data_final.to_csv()
         b64 = base64.b64encode(csv.encode()).decode()  # some strings <-> bytes conversions necessary here
-        href = f'<a href="data:file/csv;base64,{b64}">Download CSV Triangulos acumulados y FDs </a> (save as Triangulos.csv)'
+        href = f'<a href="data:file/csv;base64,{b64}">Download CSV Triangulos y FDs </a> (save as Triangulos.csv)'
         st.markdown(href, unsafe_allow_html=True)
         
         
