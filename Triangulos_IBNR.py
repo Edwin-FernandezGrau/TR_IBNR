@@ -76,7 +76,7 @@ tr_incurridos_increm = tr_incurridos_increm.fillna("")
 
 ##### TRIANGULO INCREMENTAL DE PAGOS (Tipo de movimiento P)   
 st.markdown("**Triangulo de pagos incremental**")     
-tri_p_incr = cl.Triangle(base_p, origin= var_origen , development= var_desarrollo ,columns=[var_movimiento])
+tri_p_incr = cl.Triangle(base_p, origin= var_origen , development= var_desarrollo ,columns=[var_tri])
 tr_pagos_increm = tri_p_incr.to_frame()
 tr_pagos_increm.index = tr_pagos_increm.index.strftime('%Y-%m')
 st.dataframe(tr_pagos_increm.round(2).fillna(""))
@@ -352,8 +352,8 @@ worksheet.write_number( resultado.shape[0] + 5, 5, sum(resultado["Ultimate"])  )
 #------------ agregamos hoja inconsistencias  -------------------------------------------
 
 
-
-inconsistencias.to_excel(writer,sheet_name='Inconsistencias',startrow=3 , startcol=1)
+#
+#inconsistencias.to_excel(writer,sheet_name='Inconsistencias',startrow=3 , startcol=1)
 
 
 writer.save()
