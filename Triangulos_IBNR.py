@@ -51,7 +51,7 @@ else:
 
 
 
-modelo = st.checkbox('Calcular')
+modelo = st.sidebar.buttom('Calcular')
 if modelo:
 
    
