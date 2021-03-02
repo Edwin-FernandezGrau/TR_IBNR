@@ -371,13 +371,14 @@ writer.save()
 data_final0 = tr_incurridos_increm
 
 data_final0 =  data_final0.append(pd.Series(name=''))
-data_final0.loc['TR Pagos Incremental'] = tr_incurridos_acum.columns
+data_final0.loc['TR Pagos Incremental'] = tr_pagos_increm.columns
 data_final0  = data_final0.append(tr_pagos_increm)
 
 
 data_final0 =  data_final0.append(pd.Series(name=''))
 data_final0.loc['TR Reservas incremental'] = tr_reservas_increm.columns
 data_final0  = data_final0.append(tr_reservas_increm)
+
 
 
 data_final = tr_incurridos_acum
@@ -388,14 +389,14 @@ data_final  = data_final.append(tr_pagos_acum)
 
 
 data_final =  data_final.append(pd.Series(name=''))
-data_final.loc['TR Reservas acumulado'] = tr_reservas_increm.columns
+data_final.loc['TR Reservas acumulado'] = tr_reservas_acum.columns
 data_final  = data_final.append(tr_reservas_acum)
 
 
 data_final =  data_final.append(pd.Series(name=''))
 tr_lratios_ajus["ultimo"]=""
 tr_lratios_ajus.columns = data_final.columns
-data_final.loc['TR Link Ratios '] = tr_reservas_increm.columns
+data_final.loc['TR Link Ratios '] = tr_reservas_acum.columns
 data_final  = data_final.append(tr_lratios_ajus)
 
 
