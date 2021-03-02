@@ -54,14 +54,14 @@ else:
 base_r = base[base[var_movimiento] == "R"]
 base_p = base[base[var_movimiento] == "P"]
 
-st.write("Revisamos inconsistencia de fechas")
-inconsistencias = base0.loc[base0[var_origen] > base0[var_desarrollo]] 
+#st.write("Revisamos inconsistencia de fechas")
+#inconsistencias = base0.loc[base0[var_origen] > base0[var_desarrollo]] 
 
-if inconsistencias.empty == False :
-         st.dataframe(inconsistencias)
-         base0.loc[base0[var_origen] > base0[var_desarrollo],var_desarrollo()] = base0[var_origen]
-else:
-    st.write("No existe inconsistencia entre la variable  de origen y la de desarrollo")         
+#if inconsistencias.empty == False :
+#         st.dataframe(inconsistencias)
+#         base0.loc[base0[var_origen] > base0[var_desarrollo],var_desarrollo()] = base0[var_origen]
+#else:
+#    st.write("No existe inconsistencia entre la variable  de origen y la de desarrollo")         
 
 
 ##### TRIANGULO INCREMENTAL DE INCURRIDOS (Tipo de movimiento R)
