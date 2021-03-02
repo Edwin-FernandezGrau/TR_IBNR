@@ -409,7 +409,7 @@ data_final  = data_final.fillna("")
 
 csv = data_final.to_csv()
 b64 = base64.b64encode(csv.encode()).decode()  # some strings <-> bytes conversions necessary here
-href = f'<a href="data:file/csv;base64,{b64}">Download CSV Triangulos y FDs </a> (save as &lt;Triangulos&gt;.csv)'
+href = f'<a href="data:file/csv;base64,{b64}">Download CSV Triangulos y FDs </a> (save as Triangulos.csv)'
 st.markdown(href, unsafe_allow_html=True)
 
 
@@ -417,6 +417,6 @@ resultado.loc["Total"] = resultado.sum()
 resultado.loc[("Total"),("FDA")] = ""
 csv = resultado.to_csv()
 b64 = base64.b64encode(csv.encode()).decode()  # some strings <-> bytes conversions necessary here
-href = f'<a href="data:file/csv;base64,{b64}">Download CSV Resultado </a> (save as &lt;Resultados&gt;.csv)'
+href = f'<a href="data:file/csv;base64,{b64}">Download CSV Resultado </a> (save as Resultados.csv)'
 st.markdown(href, unsafe_allow_html=True)
 
