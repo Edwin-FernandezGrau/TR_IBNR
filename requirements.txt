@@ -3,3 +3,4 @@ pandas>=0.25.3
 xlrd >= 1.0.0
 openpyxl >= 3.0.5
 Pillow==8.1.0
+chainladder >= 0.7.0
