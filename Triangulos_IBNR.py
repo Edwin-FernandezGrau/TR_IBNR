@@ -195,6 +195,7 @@ if modelo:
         ############# FACTORES DE DESARROLLO ACUMULADOS FINALES
         st.markdown("**Factores de Desarrollo por Acumulado**")
         fda_tr = Dev_cond2.fit_transform(tri_inc_acum_f).cdf_
+        fda  = fda_tr.to_frame()
         st.dataframe(fda)
         
         
