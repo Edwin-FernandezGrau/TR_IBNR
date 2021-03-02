@@ -396,6 +396,12 @@ if modelo:
         
         
         data_final =  data_final.append(pd.Series(name=''))
+        data_final.loc['TR Final '] = tr_final_acum.columns
+        data_final  = data_final.append(tr_final_acum)
+        
+        
+        
+        data_final =  data_final.append(pd.Series(name=''))
         tr_lratios_ajus["ultimo"]=""
         tr_lratios_ajus.columns = data_final.columns
         data_final.loc['TR Link Ratios '] = tr_reservas_acum.columns
