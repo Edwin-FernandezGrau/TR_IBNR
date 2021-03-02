@@ -23,6 +23,9 @@ nombre_archivo = "BASEMOD"
 uploaded_file = st.file_uploader("Choose an excel file", type="xlsx")
 
 
+if not  uploaded_file:
+        st.error("Es necesario cargar la base de siniestros")
+
 base0 = pd.read_excel(uploaded_file, header = 0 , engine = "openpyxl")
 st.dataframe(base0)
  
