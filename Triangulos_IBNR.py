@@ -17,7 +17,7 @@ st.title("Chainladder IBNR CRECER SEGUROS ")
 
 ################## TRIANGULOS EN PYTHON
 
-nombre_archivo = "BASEMOD"
+nombre_archivo = "BASEIBNR"
 
 
 uploaded_file = st.file_uploader("Choose an excel file", type="xlsx")
@@ -51,6 +51,9 @@ if f_mon == 'Si':
 
 Metodo_promedio = st.sidebar.radio("Metodo calculo FDI",
                   ('simple', 'volume'))
+
+fdi_menor = st.sidebar.radio(" ¿Acepta FDI menores a uno?",
+                  ('Si', 'No'))
 
 
 modelo = st.sidebar.button('Calcular')
@@ -170,21 +173,24 @@ if modelo:
         ### Sin embargo hay factore individuales menores a 1 
         # entonces los reemplazaremos por 1 y hallaremos los nuevos FDA
         
-        fdi2 = fdi.stack().to_frame("default")                 # alos fdi iniciales los llamaremos default
-        fdi2["min"] = 1                                        #crearemos una columna con 1 para comparar
-        fdi2["final"] = fdi2[["default", "min"]].max(axis=1)   # nos quedamos con el maximo de ambos 
-        fdi2 =fdi2.droplevel(0,0)                              # eliminamos el primer indice
-        fdi2["key"] = fdi2.index                               # creamos una columna igual al indice
-        fdi2[['first','last']] = fdi2.key.str.split("-",expand=True,)  #separamos la columna creada ( 1-2) igual a 1 y 2
-        fdi2 = fdi2[['first','final']]                         # nos quedamos con las columnas finales
-        fdi2['first'] = fdi2['first'].astype(int)              #convertimos el indice en int para que haga match con el triangulo
-                                                   #confirmamos que le tipo es int
+        if fdi_menor == 'No':
+                fdi2 = fdi.stack().to_frame("default")                 # alos fdi iniciales los llamaremos default
+                fdi2["min"] = 1                                        #crearemos una columna con 1 para comparar
+                fdi2["final"] = fdi2[["default", "min"]].max(axis=1)   # nos quedamos con el maximo de ambos 
+                fdi2 =fdi2.droplevel(0,0)                              # eliminamos el primer indice
+                fdi2["key"] = fdi2.index                               # creamos una columna igual al indice
+                fdi2[['first','last']] = fdi2.key.str.split("-",expand=True,)  #separamos la columna creada ( 1-2) igual a 1 y 2
+                fdi2 = fdi2[['first','final']]                         # nos quedamos con las columnas finales
+                fdi2['first'] = fdi2['first'].astype(int)              #convertimos el indice en int para que haga match con el triangulo
+                                                           #confirmamos que le tipo es int
+                
+                fdi2 = fdi2.set_index("first",drop = True)             # lo convertimos en indice
+                fdi2 = dict(zip(fdi2.index,fdi2["final"]))             #lo convertimos en diccionario
+                
+            
+                Dev_cond2 = cl.DevelopmentConstant(patterns=fdi2, style='ldf' )   # lo pasamos a condicion de desarrollo
         
-        fdi2 = fdi2.set_index("first",drop = True)             # lo convertimos en indice
-        fdi2 = dict(zip(fdi2.index,fdi2["final"]))             #lo convertimos en diccionario
         
-        
-        Dev_cond2 = cl.DevelopmentConstant(patterns=fdi2, style='ldf' )   # lo pasamos a condicion de desarrollo
         
         tri_lratios_ajus = Dev_cond2.fit_transform(tri_inc_acum_f).link_ratio
         tr_lratios_ajus = tri_lratios_ajus.to_frame()
