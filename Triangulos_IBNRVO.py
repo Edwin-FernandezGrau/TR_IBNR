@@ -12,7 +12,7 @@ warnings.filterwarnings("ignore", category=DeprecationWarning)
 
 
 st.set_page_config(page_title= "IBNR CRECER",layout="wide") 
-st.title("Chainladder IBNR CRECER SEGUROS ")
+st.title("Chainladder IBNR CRECER ")
 
 
 ################## TRIANGULOS EN PYTHON
@@ -26,12 +26,10 @@ uploaded_file = st.file_uploader("Choose an excel file", type="xlsx")
 if not  uploaded_file:
         st.error("Es necesario cargar la base de siniestros")
 
-
 base0 = pd.read_excel(uploaded_file, header = 0 , engine = "openpyxl")
-
 st.dataframe(base0)
  
-variables = list(base0.columns.copy())
+variables = list(base0.columns)
 
 var_origen = st.sidebar.selectbox("Seleccione variable de origen ", variables , index= 1 )         ####filas del triangulo   
 var_desarrollo = st.sidebar.selectbox("Seleccione variable desarrollo",variables , index= 2 )      #columnas del triangulo
@@ -49,8 +47,6 @@ if f_mon == 'Si':
         moneda_f =   st.sidebar.selectbox("Seleccione variable moneda ", list(base0[var_moneda].unique())  , index= 0 )
 
 
-Metodo_promedio = st.sidebar.radio("Metodo calculo FDI",
-                  ('simple', 'volume'))
 
 
 modelo = st.sidebar.button('Calcular')
@@ -139,8 +135,6 @@ if modelo:
         tr_final_acum = tr_final_acum.fillna("")
         
         
-  
-        
         ######## TRIANGULOS RATIOS INICIAL
         st.markdown("**Triangulo de Ratios**")
         
@@ -153,7 +147,7 @@ if modelo:
         #              ('2020-11',1)]
         #ajustado
         
-        Dev_cond2 = cl.Development(average= Metodo_promedio)
+        Dev_cond2 = cl.Development(average='simple')
         #Dev_cond2 = cl.Development(average='simple', drop = lista_excl)
         
         
@@ -207,7 +201,6 @@ if modelo:
         
         #Dev_cond2.fit_transform(tri_inc_acum_f)
         #cl.Chainladder().fit(Dev_cond2.fit_transform(tri_inc_acum_f)).ultimate_
-        
         # apartir de los ultimates reconstruye el triangulo
         #cl.Chainladder().fit(Dev_cond2.fit_transform(tri_inc_acum_f)).full_expectation_
         
@@ -215,12 +208,7 @@ if modelo:
         
         ######### TRIANGULO FALTANTE PROYECTADO 
         
-         ############# FACTORES DE DESARROLLO ACUMULADOS FINALES
-        st.markdown("**Proyectado**")
-        
         tr_proyectado = cl.Chainladder().fit(Dev_cond2.fit_transform(tri_inc_acum_f)).full_triangle_.to_frame()
-        tr_proyectado.index = tr_proyectado.index.strftime('%Y-%m')
-        st.dataframe(tr_proyectado)
         #cl.Chainladder().fit(Dev_cond2.fit_transform(tri_inc_acum_f)).ibnr_
         #cl.MackChainladder().fit(Dev_cond2.fit_transform(tri_inc_acum_f)).ibnr_
         
@@ -433,24 +421,17 @@ if modelo:
         data_final.loc['FDA'] = fda.columns
         data_final  = data_final.append(fda)
         
-
-        
         
         data_final  = data_final.fillna("")
         
         
-        data_final2 = tr_proyectado
+        
         
         csv = data_final.to_csv()
         b64 = base64.b64encode(csv.encode()).decode()  # some strings <-> bytes conversions necessary here
         href = f'<a href="data:file/csv;base64,{b64}">Download CSV Triangulos y FDs </a> (save as Triangulos.csv)'
         st.markdown(href, unsafe_allow_html=True)
         
-        
-        csv = data_final2.to_csv()
-        b64 = base64.b64encode(csv.encode()).decode()  # some strings <-> bytes conversions necessary here
-        href = f'<a href="data:file/csv;base64,{b64}">Download Triangulo Proyectado </a> (save as Triagulo Proyectado.csv)'
-        st.markdown(href, unsafe_allow_html=True)
         
         resultado.loc["Total"] = resultado.sum()
         resultado.loc[("Total"),("FDA")] = ""
