@@ -268,110 +268,110 @@ if modelo:
         #################### EXPORTAMOS A EXCEL   #######################################################
         
         ### creamos un excel
-        writer = pd.ExcelWriter(' Resumen '+ nombre_archivo+ " " +'.xlsx')
-        workbook=writer.book
+       # writer = pd.ExcelWriter(' Resumen '+ nombre_archivo+ " " +'.xlsx')
+        #workbook=writer.book
         
         #------------ agregamos hoja base input -------------------------------------------
-        worksheet=workbook.add_worksheet('BASE')
+        #worksheet=workbook.add_worksheet('BASE')
         
-        writer.sheets['BASE'] = worksheet
+       # writer.sheets['BASE'] = worksheet
         
-        worksheet.write_string(1, 1, "Base de siniestros")
-        base0.to_excel(writer,sheet_name='BASE',
-                                      startrow=2 , startcol=1)
+        #worksheet.write_string(1, 1, "Base de siniestros")
+        #base0.to_excel(writer,sheet_name='BASE',
+        #                              startrow=2 , startcol=1)
         
         
         #------------ agregamos hoja triangulo incurridos -------------------------------------------
-        worksheet=workbook.add_worksheet('Tri incurridos')
+        #worksheet=workbook.add_worksheet('Tri incurridos')
         
-        writer.sheets['Tri incurridos'] = worksheet
+       # writer.sheets['Tri incurridos'] = worksheet
         
-        worksheet.write_string(1, 1, "Triangulo de incurridos incremental")
-        tr_incurridos_increm.to_excel(writer,sheet_name='Tri incurridos',
-                                      startrow=2 , startcol=1)
+        #worksheet.write_string(1, 1, "Triangulo de incurridos incremental")
+        #tr_incurridos_increm.to_excel(writer,sheet_name='Tri incurridos',
+        #                              startrow=2 , startcol=1)
         
-        worksheet.write_string(tr_incurridos_increm.shape[0] + 4, 1, "Triangulo de incurridos acumulado")
-        tr_incurridos_acum.to_excel(writer,sheet_name='Tri incurridos',
-                                    startrow=tr_incurridos_increm.shape[0] + 5, startcol=1)
+       # worksheet.write_string(tr_incurridos_increm.shape[0] + 4, 1, "Triangulo de incurridos acumulado")
+        #tr_incurridos_acum.to_excel(writer,sheet_name='Tri incurridos',
+         #                           startrow=tr_incurridos_increm.shape[0] + 5, startcol=1)
         
         
         
         #------------ agregamos hoja triangulo pagos -------------------------------------------
-        worksheet=workbook.add_worksheet('Tri pagos')
+       # worksheet=workbook.add_worksheet('Tri pagos')
         
-        writer.sheets['Tri pagos'] = worksheet
+       # writer.sheets['Tri pagos'] = worksheet
         
-        worksheet.write_string(1, 1, "Triangulo de pagos incremental")
-        tr_pagos_increm.to_excel(writer,sheet_name='Tri pagos',
+        #worksheet.write_string(1, 1, "Triangulo de pagos incremental")
+        #tr_pagos_increm.to_excel(writer,sheet_name='Tri pagos',
                                       startrow=2 , startcol=1)
         
-        worksheet.write_string(tr_pagos_increm.shape[0] + 4, 1, "Triangulo de pagos acumulado")
-        tr_pagos_acum.to_excel(writer,sheet_name='Tri pagos',
-                                    startrow=tr_pagos_increm.shape[0] + 5, startcol=1)
+        #worksheet.write_string(tr_pagos_increm.shape[0] + 4, 1, "Triangulo de pagos acumulado")
+        #tr_pagos_acum.to_excel(writer,sheet_name='Tri pagos',
+         #                           startrow=tr_pagos_increm.shape[0] + 5, startcol=1)
         
         
         #------------ agregamos hoja triangulo reservas -------------------------------------------
-        worksheet=workbook.add_worksheet('Tri reservas')
+       # worksheet=workbook.add_worksheet('Tri reservas')
         
-        writer.sheets['Tri reservas'] = worksheet
+        #writer.sheets['Tri reservas'] = worksheet
         
-        worksheet.write_string(1, 1, "Triangulo de reservas incremental")
-        tr_reservas_increm.to_excel(writer,sheet_name='Tri reservas',
-                                      startrow=2 , startcol=1)
+        #worksheet.write_string(1, 1, "Triangulo de reservas incremental")
+        #tr_reservas_increm.to_excel(writer,sheet_name='Tri reservas',
+         #                             startrow=2 , startcol=1)
         
-        worksheet.write_string(tr_reservas_increm.shape[0] + 4, 1, "Triangulo de reservas acumulado - Evolución de Reservas")
-        tr_reservas_acum.to_excel(writer,sheet_name='Tri reservas',
-                                    startrow=tr_reservas_increm.shape[0] + 5, startcol=1)
+       # worksheet.write_string(tr_reservas_increm.shape[0] + 4, 1, "Triangulo de reservas acumulado - Evolución de Reservas")
+       # tr_reservas_acum.to_excel(writer,sheet_name='Tri reservas',
+        #                            startrow=tr_reservas_increm.shape[0] + 5, startcol=1)
         
         
         #------------ agregamos hoja triangulo final más link ratios inicial -------------------------------------------
-        worksheet=workbook.add_worksheet('Tri final')
+        #worksheet=workbook.add_worksheet('Tri final')
         
-        writer.sheets['Tri final'] = worksheet
+       # writer.sheets['Tri final'] = worksheet
         
-        worksheet.write_string(1, 1, "Triangulo final acumulado")
-        tr_final_acum.to_excel(writer,sheet_name='Tri final',
-                                      startrow=2 , startcol=1)
+        #worksheet.write_string(1, 1, "Triangulo final acumulado")
+        #tr_final_acum.to_excel(writer,sheet_name='Tri final',
+         #                             startrow=2 , startcol=1)
         
-        worksheet.write_string(tr_final_acum.shape[0] + 4, 1, "Link Ratios Iniciales")
-        tr_lratios_ajus.to_excel(writer,sheet_name='Tri final',
-                                    startrow=tr_final_acum.shape[0] + 5, startcol=1)
+       # worksheet.write_string(tr_final_acum.shape[0] + 4, 1, "Link Ratios Iniciales")
+        #tr_lratios_ajus.to_excel(writer,sheet_name='Tri final',
+         #                           startrow=tr_final_acum.shape[0] + 5, startcol=1)
         
         
         
         #------------ agregamos hoja de link ratios ajustados y Factores  -------------------------------------------
-        worksheet=workbook.add_worksheet('L-ratios y FDs')
+        #worksheet=workbook.add_worksheet('L-ratios y FDs')
         
-        writer.sheets['L-ratios y FDs'] = worksheet
+       # writer.sheets['L-ratios y FDs'] = worksheet
         
-        worksheet.write_string(1, 1, "Triangulo de link Ratios ajustados")
-        tr_lratios_ajus.to_excel(writer,sheet_name='L-ratios y FDs',
-                                      startrow=2 , startcol=1)
+       # worksheet.write_string(1, 1, "Triangulo de link Ratios ajustados")
+       # tr_lratios_ajus.to_excel(writer,sheet_name='L-ratios y FDs',
+        #                              startrow=2 , startcol=1)
         
-        worksheet.write_string(tr_lratios_ajus.shape[0] + 4, 1, "FDI")
-        fdi.to_excel(writer,sheet_name='L-ratios y FDs',
-                     startrow=tr_lratios_ajus.shape[0] + 5, startcol=1)
+        #worksheet.write_string(tr_lratios_ajus.shape[0] + 4, 1, "FDI")
+        #fdi.to_excel(writer,sheet_name='L-ratios y FDs',
+        #             startrow=tr_lratios_ajus.shape[0] + 5, startcol=1)
         
         
-        worksheet.write_string(tr_lratios_ajus.shape[0] + 5 + fdi.shape[0] + 3, 1, "FDA")
-        fda.to_excel(writer,sheet_name='L-ratios y FDs',
-                     startrow=tr_lratios_ajus.shape[0] + 6 + fdi.shape[0] + 3,
-                     startcol=1)
+       # worksheet.write_string(tr_lratios_ajus.shape[0] + 5 + fdi.shape[0] + 3, 1, "FDA")
+        #fda.to_excel(writer,sheet_name='L-ratios y FDs',
+         #            startrow=tr_lratios_ajus.shape[0] + 6 + fdi.shape[0] + 3,
+          #           startcol=1)
         
         
         #------------ agregamos hoja resultados  -------------------------------------------
-        worksheet=workbook.add_worksheet('Resultado')
+        #worksheet=workbook.add_worksheet('Resultado')
         
-        writer.sheets['Resultado'] = worksheet
-        worksheet.write_string(1, 1, "Tabla de Resultados IBNR") 
-        resultado.to_excel(writer,sheet_name='Resultado',startrow=3 , startcol=1)
-        llaves.to_excel(writer,sheet_name='Resultado',startrow=4 , startcol=8)
+        #writer.sheets['Resultado'] = worksheet
+        #worksheet.write_string(1, 1, "Tabla de Resultados IBNR") 
+        #resultado.to_excel(writer,sheet_name='Resultado',startrow=3 , startcol=1)
+        #llaves.to_excel(writer,sheet_name='Resultado',startrow=4 , startcol=8)
         
         #totales
-        worksheet.write_string( resultado.shape[0] + 5, 1, "Total")
-        worksheet.write_number( resultado.shape[0] + 5, 2, sum(resultado["Latest"])) 
-        worksheet.write_number( resultado.shape[0] + 5, 4, sum(resultado["IBNR"])  ) 
-        worksheet.write_number( resultado.shape[0] + 5, 5, sum(resultado["Ultimate"])  ) 
+        #worksheet.write_string( resultado.shape[0] + 5, 1, "Total")
+        #worksheet.write_number( resultado.shape[0] + 5, 2, sum(resultado["Latest"])) 
+        #worksheet.write_number( resultado.shape[0] + 5, 4, sum(resultado["IBNR"])  ) 
+        #worksheet.write_number( resultado.shape[0] + 5, 5, sum(resultado["Ultimate"])  ) 
         
         
         #------------ agregamos hoja inconsistencias  -------------------------------------------
@@ -381,7 +381,7 @@ if modelo:
         #inconsistencias.to_excel(writer,sheet_name='Inconsistencias',startrow=3 , startcol=1)
         
         
-        writer.save()
+      #  writer.save()
         
         
         
