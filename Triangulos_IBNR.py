@@ -303,7 +303,7 @@ if modelo:
         
         #worksheet.write_string(1, 1, "Triangulo de pagos incremental")
         #tr_pagos_increm.to_excel(writer,sheet_name='Tri pagos',
-                                      startrow=2 , startcol=1)
+        #                              startrow=2 , startcol=1)
         
         #worksheet.write_string(tr_pagos_increm.shape[0] + 4, 1, "Triangulo de pagos acumulado")
         #tr_pagos_acum.to_excel(writer,sheet_name='Tri pagos',
