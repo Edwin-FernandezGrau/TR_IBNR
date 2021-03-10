@@ -203,7 +203,6 @@ if modelo:
                 Dev_cond2 = cl.DevelopmentConstant(patterns=fdi2, style='ldf' )   # lo pasamos a condicion de desarrollo
         
         
-        
         tri_lratios_ajus = Dev_cond2.fit_transform(tri_inc_acum_f).link_ratio
         tr_lratios_ajus = tri_lratios_ajus.to_frame()
         tr_lratios_ajus.index = tr_lratios_ajus.index.strftime('%Y-%m')
