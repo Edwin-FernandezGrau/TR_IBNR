@@ -56,6 +56,15 @@ fdi_menor = st.sidebar.radio(" ¿Acepta FDI menores a uno?",
                   ('Si', 'No'))
 
 
+f_per = st.sidebar.radio("Desea determinar nro de periodos",
+                  ('Si', 'No'))
+
+
+if f_per == 'Si':
+            periodos = st.sidebar.selectbox("Seleccione periodos ", [12,24,36,48] , index= 1 )
+        
+
+
 modelo = st.sidebar.button('Calcular')
 if modelo:
    
@@ -157,6 +166,9 @@ if modelo:
         #ajustado
         
         Dev_cond2 = cl.Development(average= Metodo_promedio)
+        
+        if f_per == 'Si':
+            Dev_cond2 = cl.Development(average= Metodo_promedio , n_periods = periodos)
         #Dev_cond2 = cl.Development(average='simple', drop = lista_excl)
         
         
