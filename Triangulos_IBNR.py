@@ -11,8 +11,8 @@ import base64
 warnings.filterwarnings("ignore", category=DeprecationWarning)
 
 
-st.set_page_config(page_title= "IBNR CRECER",layout="wide") 
-st.title("Chainladder IBNR CRECER SEGUROS ")
+st.set_page_config(page_title= "IBNR Model",layout="wide") 
+st.title("Chain Ladder IBNR  ")
 
 
 ################## TRIANGULOS EN PYTHON

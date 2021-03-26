@@ -139,7 +139,8 @@ if modelo:
         tr_final_acum = tr_final_acum.fillna("")
         
         
-  
+        print('Correlation across valuation years? ', tr_final_acum.valuation_correlation(p_critical=.1, total=True).z_critical.values)
+        print('Correlation across origin years? ', tr_final_acum.development_correlation(p_critical=.5).t_critical.values)
         
         ######## TRIANGULOS RATIOS INICIAL
         st.markdown("**Triangulo de Ratios**")
